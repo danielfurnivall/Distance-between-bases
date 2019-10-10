@@ -73,7 +73,6 @@ df1.to_csv('W:/Python/Danny/Postcode Analysis/test.csv')
 bins = [0, 2, 5, 10, 15, 100]
 labels = ['Within 2 miles', '2-5 miles', '5-10 miles', '10-15 miles', '15+ miles']
 df1['Distance_Class'] = pd.cut(df1['vale_of_leven'], bins = bins, labels = labels, right = False)
-df1.to_csv('W:/Python/Danny/Postcode Analysis/test.csv')
 
 
 
