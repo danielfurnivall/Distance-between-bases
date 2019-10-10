@@ -65,20 +65,20 @@ for index, row in df.iterrows():
     miles['Dykebar_Diff'] = miles['dykebar'] - miles['vale_of_leven']
     miles['Leverndale_Diff'] = miles['leverndale'] - miles['vale_of_leven']
     miles['Stobhill_Diff'] = miles['stobhill'] - miles['vale_of_leven']
-    #TODO the below code should be replaced with a pd.cut at some point
-    miles['Distance_Class'] = np.where(miles['vale_of_leven'] < 2, 'Within 2 miles',
-                                       np.where(miles['vale_of_leven'] < 5, 'Within 5 miles',
-                                                np.where(miles['vale_of_leven'] < 10, 'Within 10 miles',
-                                                         np.where(miles['vale_of_leven'] < 15, 'Within 15 miles',
-                                                                  'over 15 miles'))))
 
-
-
-
-
-
+    rows.append(miles)
 df1 = pd.DataFrame(rows)
+df1.to_csv('W:/Python/Danny/Postcode Analysis/test.csv')
+
+bins = [0, 2, 5, 10, 15, 100]
+labels = ['Within 2 miles', '2-5 miles', '5-10 miles', '10-15 miles', '15+ miles']
+df1['Distance_Class'] = pd.cut(df1['vale_of_leven'], bins = bins, labels = labels, right = False)
+df1.to_csv('W:/Python/Danny/Postcode Analysis/test.csv')
+
+
+
 df1 = df1.merge(sd[['Pay No','Pay_Band', 'Age']], how='inner', on='Pay No')
+
 df1.to_csv('W:/Python/Danny/Postcode Analysis/New Distance.csv', index=False)
 
 
